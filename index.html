@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelli Creations & Design</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.0/gsap.min.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Intelli Creations & Design</h1>
+    </div>
+
+    <div class="nav-icon">
+        <div class="bar bar_1"></div>
+        <div class="bar bar_2"></div>
+    </div>
+
+    <div class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Contact</a></li>
+    </div>
+
+    <div class="nav-container">
+        <div class="nav-header">
+            <h1>Intelli Creations & Design</h1>
+        </div>
+        <div class="nav-items">
+            <li>Our Vision</li>
+            <li>Projects</li>
+            <li>Video</li>
+            <li>About Us</li>
+        </div>
+        <div class="rights"><p>© 2024 All Rights Reserved</p></div>
+    </div>
+
+    <!-- Digital Clock -->
+    <div id="digital-clock"></div>
+
+    <script>
+        var t1 = new TimelineMax({paused: true});
+
+        t1.to(".nav-icon > .bar_1", 0.2, {
+            rotation: 45,
+            ease: Expo.Power1
+        });
+
+        t1.to(".nav-icon > .bar_2", 0.2, {
+            rotation: -45,
+            ease: Expo.Power1,
+            delay: -0.2
+        });
+
+        t1.to(".nav-container", 0.3, {
+            opacity: 1,
+            ease: Expo.Power1,
+            delay: -0.2
+        });
+
+        t1.staggerTo(".nav li", 0.2, {
+            opacity: 1,
+            ease: Expo.Power1,
+            delay: -0.2
+        }, 0.08);
+
+        t1.staggerTo(".nav-items > li", 0.2, {
+            opacity: 1,
+            ease: Expo.Power1,
+            delay: 0.05
+        }, 0.08);
+
+        t1.to(".rights", 0.3, {
+            opacity: 1,
+            ease: Expo.Power1,
+            delay: -0.1
+        });
+
+        t1.to(".nav-header", 0.3, {
+            opacity: 1,
+            ease: Expo.Power1,
+            delay: -0.5
+        });
+
+        t1.to("#digital-clock", 0.3, {
+            opacity: 0,
+            ease: Expo.Power1,
+            delay: -0.5
+        }); // Fade out clock
+
+        t1.reverse();
+
+        $(document).on("click", ".nav-icon", function() {
+            t1.reversed(!t1.reversed());
+        });
+
+        // Function to update the clock every millisecond
+        function updateClock() {
+            var now = new Date();
+            var hours = String(now.getHours()).padStart(2, '0');
+            var minutes = String(now.getMinutes()).padStart(2, '0');
+            var seconds = String(now.getSeconds()).padStart(2, '0');
+            var milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+
+            // Update the digital clock's inner HTML to include colons and line breaks
+         document.getElementById('digital-clock').innerHTML = 
+        `<div>${hours}:${minutes}:${seconds}:${milliseconds}</div>`;
+        }
+
+        // Update the clock every millisecond
+        setInterval(updateClock, 1);
+    </script>
+</body>
+
+</html>
